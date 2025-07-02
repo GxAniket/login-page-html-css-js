@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login to Your App</title>
+  <link rel="icon" href="lock-picture.png" type="image/x-icon" />
+
+  <!-- Styles -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #111827;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 380px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .app-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .input-group.error input {
+      border-color: #dc2626;
+    }
+
+    .input-error-msg {
+      font-size: 0.85rem;
+      color: #dc2626;
+      margin-top: 0.25rem;
+    }
+
+    .msg {
+      margin: 1rem 0 0.5rem;
+      font-size: 0.9rem;
+      min-height: 1.25rem;
+    }
+
+    .msg.success {
+      color: #16a34a;
+    }
+
+    .msg.error {
+      color: #dc2626;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      background-color: #5b54de;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background-color: #7065ee;
+      box-shadow: 0 2px 16px #020503a8;
+    }
+
+    /* Links styling */
+    .link-left {
+      text-align: left;
+      font-size: 0.9rem;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .link-center {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .link-left a,
+    .link-center a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    .link-left a:hover,
+    .link-center a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="login-container">
+    <!-- Logo -->
+    <img id="logoImage" src="logo.jpg" alt="App Logo" class="app-logo"
+      onerror="this.onerror=null; this.src='https://placehold.co/80x80/6366f1/ffffff?text=Logo';" />
+
+    <!-- Login Form -->
+    <form id="loginForm" autocomplete="off">
+      <h2 class="title">Sign in</h2>
+
+      <!-- Email -->
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@gmail.com" required />
+        <p class="input-error-msg" id="emailError" aria-live="polite"></p>
+      </div>
+
+      <!-- Password -->
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="12345678" minlength="6" maxlength="8" required />
+        <p class="input-error-msg" id="passwordError" aria-live="polite"></p>
+      </div>
+
+      <!-- Forgot password aligned left -->
+      <div class="link-left">
+        <a href="forget.html" id="forgotPassword">Forgot password?</a>
+      </div>
+
+      <!-- Error/success message -->
+      <p class="msg" id="msg" aria-live="polite"></p>
+
+      <!-- Submit button -->
+      <button type="submit" class="btn">Log in</button>
+
+      <!-- Sign up centered -->
+      <div class="link-center">
+        <a href="signup.html" id="signUp">Sign up</a>
+      </div>
+    </form>
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    const DEMO_EMAIL = 'you@gmail.com';
+    const DEMO_PASSWORD = '12345678';
+
+    const form = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const msgBox = document.getElementById('msg');
+    const emailErrorMsg = document.getElementById('emailError');
+    const passwordErrorMsg = document.getElementById('passwordError');
+    const submitButton = form.querySelector('.btn');
+    const logoImage = document.getElementById('logoImage');
+
+    function clearErrors() {
+      msgBox.textContent = '';
+      msgBox.className = 'msg';
+      emailErrorMsg.textContent = '';
+      emailInput.closest('.input-group').classList.remove('error');
+      passwordErrorMsg.textContent = '';
+      passwordInput.closest('.input-group').classList.remove('error');
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors();
+
+      const mail = emailInput.value.trim();
+      const pass = passwordInput.value;
+
+      let formIsValid = true;
+
+      if (!mail) {
+        emailErrorMsg.textContent = 'Email is required.';
+        emailInput.closest('.input-group').classList.add('error');
+        formIsValid = false;
+      } else if (!isValidEmail(mail)) {
+        emailErrorMsg.textContent = 'Please enter a valid email address.';
+        emailInput.closest('.input-group').classList.add('error');
+        formIsValid = false;
+      }
+
+      if (!pass) {
+        passwordErrorMsg.textContent = 'Password is required.';
+        passwordInput.closest('.input-group').classList.add('error');
+        formIsValid = false;
+      } else if (pass.length < 6) {
+        passwordErrorMsg.textContent = 'Password must be at least 6 characters.';
+        passwordInput.closest('.input-group').classList.add('error');
+        formIsValid = false;
+      }
+
+      if (!formIsValid) {
+        msgBox.textContent = 'Please correct the errors above.';
+        msgBox.classList.add('error');
+        logoImage.src = 'logo.jpg';
+        return;
+      }
+
+      submitButton.disabled = true;
+      msgBox.textContent = 'Logging in...';
+
+      setTimeout(() => {
+        if (mail === DEMO_EMAIL && pass === DEMO_PASSWORD) {
+          msgBox.textContent = 'Login successful!';
+          msgBox.classList.add('success');
+          form.reset();
+          logoImage.src = 'aniket.png';
+        } else {
+          msgBox.textContent = 'Invalid email or password.';
+          msgBox.classList.add('error');
+          logoImage.src = 'logo.jpg';
+        }
+        submitButton.disabled = false;
+      }, 1000);
+    });
+
+    emailInput.addEventListener('input', clearErrors);
+    passwordInput.addEventListener('input', clearErrors);
+
+    // Hyperlink alerts with redirection
+    document.getElementById('forgotPassword').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Redirecting to password-reset page...');
+      window.location.href = 'forget.html';
+    });
+
+    document.getElementById('signUp').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('Redirecting to registration page...');
+      window.location.href = 'signup.html';
+    });
+  </script>
+</body>
+</html>
