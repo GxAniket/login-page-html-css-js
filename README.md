@@ -27,10 +27,6 @@ This project is a responsive and modern **login page** built using **HTML**, **C
 
 ---
 
-> *Replace the preview image with a real screenshot of your login form UI (recommended size: 800x400).*
-
----
-
 ## ✨ Features
 
 - ✅ Clean and responsive UI using modern HTML5 and CSS3
