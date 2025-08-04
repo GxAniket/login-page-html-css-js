@@ -1,11 +1,8 @@
 # login-page-html-css-js
+
 A responsive and modern login page built with HTML, CSS, and JavaScript. Includes demo links to “Forgot Password?” and “Sign Up” pages for frontend presentation purposes only. These pages are static and do not perform real authentication — ideal for UI/UX demos or company evaluation.
 
 ---
-
-## 🚀 Live Demo
-
-👉 [Click here to view the live demo](https://gxaniket.github.io/login-page-html-css-js/)
 
 # 🔐 Modern Login Page with HTML, CSS & JavaScript
 
@@ -23,12 +20,17 @@ This project is a responsive and modern **login page** built using **HTML**, **C
 
 ## 📸 Preview
 
-![Login Preview]![index html](https://github.com/user-attachments/assets/dd7f3291-8db9-464d-b8aa-46777424bc34)
+
+
+![index html](https://github.com/user-attachments/assets/dd7f3291-8db9-464d-b8aa-46777424bc34)
+
+
 
 ---
 
 ## ✨ Features
-
+<pre>
+  
 - ✅ Clean and responsive UI using modern HTML5 and CSS3
 - ✅ Email and password field validation
 - ✅ Error/success messages
@@ -37,25 +39,29 @@ This project is a responsive and modern **login page** built using **HTML**, **C
   - "Sign Up" → `signup.html`
 - ✅ Logo with fallback image if not found
 - ✅ Mobile-friendly layout
-
+  
+</pre>
 ---
 
 ## 🗂️ Folder Structure
+<pre>
 login-page-html-css-js/
 ├── index.html # Login page
 ├── signup.html # Sign up demo page
 ├── forget.html # Forgot password demo page
 ├── LICENSE
 └── README.md
-
+</pre>
 ---
 
 ## 🔧 Technologies Used
-
+<pre>
+  
 - HTML5
 - CSS3
 - JavaScript (Vanilla)
-
+  
+</pre>
 ---
 
 ## ⚠️ Note
