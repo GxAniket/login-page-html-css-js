@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password</title>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #111827;
+      margin: 0;
+    }
+
+    .reset-container {
+      width: 100%;
+      max-width: 380px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 18px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .msg {
+      margin: 1rem 0 0.5rem;
+      font-size: 0.9rem;
+      min-height: 1.25rem;
+    }
+    .msg.success { color: #16a34a; }
+    .msg.error { color: #dc2626; }
+
+    .btn {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      background-color: #5b54de;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn:hover {
+      background-color: #7065ee;
+      box-shadow: 0 2px 16px #020503a8;
+    }
+
+    .link-center {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+    .link-center a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+    .link-center a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <main class="reset-container">
+    <h2>Reset Password</h2>
+    <p>Enter your email and we’ll send you a password reset link.</p>
+
+    <form id="resetForm" autocomplete="off">
+      <div class="input-group">
+        <label for="resetEmail">Email</label>
+        <input type="email" id="resetEmail" name="resetEmail" placeholder="you@gmail.com" required/>
+      </div>
+
+      <p class="msg" id="resetMsg"></p>
+
+      <button type="submit" class="btn">Send Reset Link</button>
+
+      <div class="link-center">
+        <a href="login.html">Back to Login</a>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    const resetForm = document.getElementById('resetForm');
+    const resetEmail = document.getElementById('resetEmail');
+    const resetMsg = document.getElementById('resetMsg');
+
+    resetForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      resetMsg.textContent = '';
+      resetMsg.className = 'msg';
+
+      const email = resetEmail.value.trim();
+
+      if (!email) {
+        resetMsg.textContent = 'Email is required.';
+        resetMsg.classList.add('error');
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        resetMsg.textContent = 'Please enter a valid email.';
+        resetMsg.classList.add('error');
+        return;
+      }
+
+      // Demo sending link
+      resetMsg.textContent = 'Sending reset link...';
+
+      setTimeout(() => {
+        resetMsg.textContent = `Password reset link has been sent to ${email}!`;
+        resetMsg.classList.add('success');
+        resetForm.reset();
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
