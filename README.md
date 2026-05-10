@@ -64,7 +64,7 @@ login-page-html-css-js/
 </pre>
 ---
 
-## ⚠️ Note
+## ⚠️ Notes
 
 > This project is for demo purposes only. The **"Sign Up"** and **"Forgot Password?"** pages are static and do not contain backend or database integration.
 
